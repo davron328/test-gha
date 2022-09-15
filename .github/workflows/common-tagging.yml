@@ -30,3 +30,4 @@ jobs:
         with:
           tag: 'v.${{ steps.extract_branch.outputs.branch }}.0.0.1'
           message: "Latest release"
+        run: git describe --abbrev=0
