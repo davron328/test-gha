@@ -16,4 +16,6 @@ jobs:
         with: 
           who-to-greet: Tima
       - name: Log Greeting Tima
-        run: echo "${{steps.greet.outputs.time}}"
+        run: |
+          echo "${{steps.greet.outputs.time}}"
+          echo "${{steps.greet.outputs.id}}"
