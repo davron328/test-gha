@@ -1,0 +1,19 @@
+name: tagging strategy
+
+on:
+  push:
+    branches:
+      - master
+    
+
+jobs:
+  simple-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: simple JS Actions
+        id: greet
+        uses: actions/hello-world-javascript-action@v1
+        with: 
+          who-to-greet: Tima
+      - name: Log Greeting Tima
+        run: echo "${{steps.greet.outputs.time}}"
