@@ -19,19 +19,22 @@ jobs:
           echo "${{steps.greet.outputs.time}}"
           echo "${{steps.greet.outputs.id}}"
   create-tag:
+  # how to make sure that step runs if only there is no error on github actions workflow. 
     runs-on: ubuntu-latest
     steps:
-      - name: Extract branch name
+      # if: branch is uat and prod
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: create tag version
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
-      - name: checkout
-        uses: actions/checkout@v3
+      
       - name: tagging 
         continue-on-error: true
         uses: rickstaa/action-create-tag@v1
         with:
-          tag: 'v.${{ steps.extract_branch.outputs.branch }}.0.0.1'
+          tag: 'v.${{ steps.extract_branch.outputs.branch }}.${{ 0.0.1+1 }}'
           message: "Latest release"
       - name: current tag
         run: git describe --abbrev=0
