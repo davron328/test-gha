@@ -34,7 +34,7 @@ jobs:
         working-directory: scripts
         run: echo -e "$(bash auto_increment_tag_version.sh ${{ steps.get-latest-tag.outputs.tag }})"
       - name: current branch
-        run: echo ${ GITHUB_REF##*/ }
+        run: echo ${GITHUB_REF##*/}
 
       # - name: Tag version
       #   id: version
