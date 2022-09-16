@@ -21,6 +21,10 @@ jobs:
   create-tag:
   # how to make sure that step runs if only there is no error on github actions workflow. 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        # working-directory: scripts
     steps:
       # if: branch is uat and prod
       - name: checkout
