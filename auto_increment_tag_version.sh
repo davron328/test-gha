@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #get highest tag number
-VERSION=`git describe --abbrev=0 --tags`
+VERSION="git describe --abbrev=0 --tags"
 
 #replace . with space so can split into an array
 VERSION_BITS=(${VERSION//./ })
@@ -10,12 +10,12 @@ VERSION_BITS=(${VERSION//./ })
 VNUM1=${VERSION_BITS[2]}
 VNUM2=${VERSION_BITS[3]}
 VNUM3=${VERSION_BITS[4]}
-# VNUM1=`echo $VNUM1 | sed 's/v//'`
+# VNUM1="echo $VNUM1 | sed 's/v//'"
 echo $VNUM1 $VNUM2 $VNUM3
 
 # # Check for #major or #minor in commit message and increment the relevant version number
-MAJOR=`git log --format=%B -n 1 HEAD | grep '#major'`
-MINOR=`git log --format=%B -n 1 HEAD | grep '#minor'`
+MAJOR="git log --format=%B -n 1 HEAD | grep '#major'"
+MINOR="git log --format=%B -n 1 HEAD | grep '#minor'"
 
 if [ "$MAJOR" ]; then
     echo "Update major version"
@@ -39,8 +39,8 @@ echo "$VNUM1.$VNUM2.$VNUM3"
 # echo "Updating $VERSION to $NEW_TAG"
 
 # #get current hash and see if it already has a tag
-# GIT_COMMIT=`git rev-parse HEAD`
-# NEEDS_TAG=`git describe --contains $GIT_COMMIT`
+# GIT_COMMIT="git rev-parse HEAD"
+# NEEDS_TAG="git describe --contains $GIT_COMMIT"
 
 # #only tag if no tag already (would be better if the git describe command above could have a silent option)
 # if [ -z "$NEEDS_TAG" ]; then
