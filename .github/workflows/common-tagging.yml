@@ -32,12 +32,15 @@ jobs:
       - name: Tag version
         id: version
         run: |
+          chmod +x auto_increment_tag_version.sh
           bash auto_increment_tag_version.sh
-          /bin/bash auto_increment_tag_version.sh
-          echo -e $(/bin/bash auto_increment_tag_version.sh)
-          # echo -e "::set-output name=version::$(bash auto_increment_tag_version.sh)"
-      - name: new_version
-        run: echo "${{ steps.version.outputs.version }}"
+          # /bin/bash auto_increment_tag_version.sh
+          # echo -e $(/bin/bash auto_increment_tag_version.sh)
+          # # echo -e "::set-output name=version::$(bash auto_increment_tag_version.sh)"
+
+
+      # - name: new_version
+      #   run: echo "${{ steps.version.outputs.version }}"
 
       # - name: Create a tag
       # - uses: rickstaa/action-create-tag@v1
