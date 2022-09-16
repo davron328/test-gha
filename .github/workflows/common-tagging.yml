@@ -32,9 +32,20 @@ jobs:
         run: echo ${{ steps.get-latest-tag.outputs.tag }}
       - name: run scripts
         working-directory: scripts
-        run: echo -e "$(bash auto_increment_tag_version.sh ${{ steps.get-latest-tag.outputs.tag }})"
-      - name: current branch
-        run: echo ${GITHUB_REF##*/}
+        run: echo "::set-output name=version::$(bash auto_increment_tag_version.sh ${{ steps.get-latest-tag.outputs.tag }})"
+        id: current_version
+      # - name: current branch
+      #   run: echo ${GITHUB_REF##*/}
+      # - name: new_version
+      #   run: echo "${{ steps.version.outputs.version }}"
+
+      - name: Create a tag
+      - uses: rickstaa/action-create-tag@v1
+        with:
+          tag: "v.${GITHUB_REF##*/}.${{ steps.current_version.outputs.version }}"
+          message: "Latest release"
+      # - name: current tag 
+      #   run: git describe --abbrev=0
 
       # - name: Tag version
       #   id: version
@@ -48,16 +59,7 @@ jobs:
         # # echo -e "::set-output name=version::$(bash auto_increment_tag_version.sh)"
 
 
-      # - name: new_version
-      #   run: echo "${{ steps.version.outputs.version }}"
-
-      # - name: Create a tag
-      # - uses: rickstaa/action-create-tag@v1
-      #   with:
-      #     tag: "latest"
-      #     message: "Latest release"
-      # - name: current tag 
-      #   run: git describe --abbrev=0
+      
       
 
 
