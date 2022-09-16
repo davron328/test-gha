@@ -34,12 +34,12 @@ jobs:
         working-directory: scripts
         run: echo "::set-output name=version::$(bash auto_increment_tag_version.sh ${{ steps.get-latest-tag.outputs.tag }})"
         id: current_version
-      - name: current branch
-        run: echo "::set-output name=cur_branch::${GITHUB_REF##*/}"
-        id: branch
-      - name: Create a tag
-      - uses: rickstaa/action-create-tag@v1
-        with:
-          tag: "v.${{ steps.branch.outputs.cur_branch }}.${{ steps.current_version.outputs.version }}"
-          message: "Latest release"
+      # - name: current branch
+      #   run: echo "::set-output name=cur_branch::${GITHUB_REF##*/}"
+      #   id: branch
+      # - name: Create a tag
+      # - uses: rickstaa/action-create-tag@v1
+      #   with:
+      #     tag: "v.${{ steps.branch.outputs.cur_branch }}.${{ steps.current_version.outputs.version }}"
+      #     message: "Latest release"
 
