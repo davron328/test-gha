@@ -24,13 +24,13 @@ jobs:
     defaults:
       run:
         shell: bash
-        # working-directory: scripts
+        working-directory: scripts
     steps:
       # if: branch is uat and prod
       - name: checkout
         uses: actions/checkout@v3
       - name: Tag version
-        run: bash ../../auto_increment_tag_version.sh
+        run: bash auto_increment_tag_version.sh
         # run: echo -e "::set-output name=TAG_NAME::$(bash ../../auto_increment_tag_version.sh)
       # - name: Create a tag
       # - uses: rickstaa/action-create-tag@v1
