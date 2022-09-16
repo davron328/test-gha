@@ -32,7 +32,9 @@ jobs:
       - name: Tag version
         id: version
         run: |
-          echo -e $(bash auto_increment_tag_version.sh)
+          bash auto_increment_tag_version.sh
+          /bin/bash auto_increment_tag_version.sh
+          echo -e $(/bin/bash auto_increment_tag_version.sh)
           # echo -e "::set-output name=version::$(bash auto_increment_tag_version.sh)"
       - name: new_version
         run: echo "${{ steps.version.outputs.version }}"
