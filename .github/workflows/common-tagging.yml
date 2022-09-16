@@ -22,7 +22,7 @@ jobs:
   # how to make sure that step runs if only there is no error on github actions workflow. 
     runs-on: ubuntu-latest      
     steps:
-      # if: branch is uat and prod
+      # if: branch is uat and Prod
       - name: checkout
         uses: actions/checkout@v3
       - name: get latest tag
