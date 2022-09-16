@@ -28,9 +28,10 @@ jobs:
       - name: fetch tags
         run: git fetch --tags origin
       - name: run scripts
-        run: git describe --abbrev=0 --tags --always
-          # VERSION=$(git describe --abbrev=0 --tags)
-          # echo $VERSION
+        run: |
+          git describe --abbrev=0 --tags --always
+          VERSION=$(git describe --abbrev=0 --tags --always)
+          echo $VERSION
 
       # - name: Tag version
       #   id: version
