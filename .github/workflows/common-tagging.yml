@@ -26,9 +26,9 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
       - name: run scripts
-        run: |
-          VERSION=$(git describe --abbrev=0 --tags)
-          echo $VERSION
+        run: git describe --abbrev=0 --tags
+          # VERSION=$(git describe --abbrev=0 --tags)
+          # echo $VERSION
 
       # - name: Tag version
       #   id: version
