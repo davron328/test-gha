@@ -25,16 +25,32 @@ jobs:
       # if: branch is uat and prod
       - name: checkout
         uses: actions/checkout@v3
-      - name: create tag version
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
+      - name: Tag version
+        run: echo "::set-output name=TAG_NAME::$(bash ../../auto_increment_tag_version.sh)
+      # - name: Create a tag
+      # - uses: rickstaa/action-create-tag@v1
+      #   with:
+      #     tag: "latest"
+      #     message: "Latest release"
+      # - name: current tag 
+      #   run: git describe --abbrev=0
       
-      - name: tagging 
-        continue-on-error: true
-        uses: rickstaa/action-create-tag@v1
-        with:
-          tag: 'v.${{ steps.extract_branch.outputs.branch }}.${{ 0.0.1+1 }}'
-          message: "Latest release"
-      - name: current tag
-        run: git describe --abbrev=0
+
+
+      # - name: set env
+        # run: echo "LAST_TAG=$(git describe --abbrev=0 | cut -c 10-14)" >> $GITHUB_ENV
+      # - name: create tag version
+      #   shell: bash
+      #   run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      #   id: extract_branch
+      # - name: tagging 
+      #   continue-on-error: true
+      #   uses: rickstaa/action-create-tag@v1
+      #   with:
+      #     tag: 'v.${{ steps.extract_branch.outputs.branch }}.0.0.1'
+      #     message: "Latest release"
+      # - name: current tag 
+      #   run: git describe --abbrev=0
+
+      #   name: Create/update tag
+
