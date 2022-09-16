@@ -30,8 +30,10 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
       - name: Tag version
-        run: bash auto_increment_tag_version.sh
-        # run: echo -e "::set-output name=TAG_NAME::$(bash ../../auto_increment_tag_version.sh)
+        run: |
+          echo -e "::set-output name=TAG_NAME :: $(bash auto_increment_tag_version.sh)
+          echo ${ TAG_NAME }
+
       # - name: Create a tag
       # - uses: rickstaa/action-create-tag@v1
       #   with:
