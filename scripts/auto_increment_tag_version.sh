@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #get highest tag number
-VERSION=`git describe --abbrev=0 --tags`
+VERSION=$1
 
 #replace . with space so can split into an array
 VERSION_BITS=(${VERSION//./ })

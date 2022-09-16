@@ -18,6 +18,8 @@ jobs:
         run: |
           echo "${{steps.greet.outputs.time}}"
           echo "${{steps.greet.outputs.id}}"
+      - name: run scripts
+        run: echo "bash auto_increment_tag_version.sh ${{steps.greet.outputs.id}}"
   create-tag:
   # how to make sure that step runs if only there is no error on github actions workflow. 
     runs-on: ubuntu-latest      
