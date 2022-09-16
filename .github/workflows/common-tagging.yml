@@ -20,20 +20,46 @@ jobs:
           echo "${{steps.greet.outputs.id}}"
   create-tag:
   # how to make sure that step runs if only there is no error on github actions workflow. 
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-        working-directory: scripts
+    runs-on: ubuntu-latest      
     steps:
       # if: branch is uat and prod
       - name: checkout
         uses: actions/checkout@v3
-      - name: Tag version
-        id: version
+      - name: run scripts
         run: |
-          chmod +x auto_increment_tag_version.sh
-          bash auto_increment_tag_version.sh
+          #!/bin/bash
+          VERSION="git describe --abbrev=0 --tags"
+          VERSION_BITS=(${VERSION//./ })
+          VNUM1=${VERSION_BITS[2]}
+          VNUM2=${VERSION_BITS[3]}
+          VNUM3=${VERSION_BITS[4]}
+          VNUM1="echo $VNUM1 | sed 's/v//'"
+
+          # Check for #major or #minor in commit message and increment the relevant version number
+          MAJOR="git log --format=%B -n 1 HEAD | grep '#major'"
+          MINOR="git log --format=%B -n 1 HEAD | grep '#minor'"
+
+          if [ "$MAJOR" ]; then
+              echo "Update major version"
+              VNUM1=$((VNUM1+1))
+              VNUM2=0
+              VNUM3=0
+          elif [ "$MINOR" ]; then
+              echo "Update minor version"
+              VNUM2=$((VNUM2+1))
+              VNUM3=0
+          else
+              echo "Update patch version"
+              VNUM3=$((VNUM3+1))
+          fi
+          echo "$VNUM1.$VNUM2.$VNUM3"
+      # - name: Tag version
+      #   id: version
+      #   run: |
+      #     chmod +x auto_increment_tag_version.sh
+      #     bash auto_increment_tag_version.sh
+      #   shell: bash
+      #   working-directory: scripts
         # /bin/bash auto_increment_tag_version.sh
         # echo -e $(/bin/bash auto_increment_tag_version.sh)
         # # echo -e "::set-output name=version::$(bash auto_increment_tag_version.sh)"

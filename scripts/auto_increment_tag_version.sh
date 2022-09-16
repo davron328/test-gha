@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 #get highest tag number
@@ -31,6 +30,7 @@ else
     VNUM3=$((VNUM3+1))
 fi
 echo "$VNUM1.$VNUM2.$VNUM3"
+
 # #create new tag
 # NEW_TAG="v$VNUM1.$VNUM2.$VNUM3"
 
