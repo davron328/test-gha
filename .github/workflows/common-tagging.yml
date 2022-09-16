@@ -25,6 +25,8 @@ jobs:
       # if: branch is uat and prod
       - name: checkout
         uses: actions/checkout@v3
+      - name: fetch tags
+        run: git fetch --tags origin
       - name: run scripts
         run: git describe  --tags
           # VERSION=$(git describe --abbrev=0 --tags)
