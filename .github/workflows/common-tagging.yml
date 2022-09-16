@@ -37,47 +37,9 @@ jobs:
       - name: current branch
         run: echo "::set-output name=cur_branch::${GITHUB_REF##*/}"
         id: branch
-      # - name: new_version
-      #   run: echo "${{ steps.version.outputs.version }}"
-
       - name: Create a tag
       - uses: rickstaa/action-create-tag@v1
         with:
-          tag: "v.${{ steps.current_version.outputs.version }}"
+          tag: "v.${{ steps.branch.outputs.cur_branch }}.${{ steps.current_version.outputs.version }}"
           message: "Latest release"
-      # - name: current tag 
-      #   run: git describe --abbrev=0
-
-      # - name: Tag version
-      #   id: version
-      #   run: |
-      #     chmod +x auto_increment_tag_version.sh
-      #     bash auto_increment_tag_version.sh
-      #   shell: bash
-      #   working-directory: scripts
-        # /bin/bash auto_increment_tag_version.sh
-        # echo -e $(/bin/bash auto_increment_tag_version.sh)
-        # # echo -e "::set-output name=version::$(bash auto_increment_tag_version.sh)"
-
-
-      
-      
-
-
-      # - name: set env
-        # run: echo "LAST_TAG=$(git describe --abbrev=0 | cut -c 10-14)" >> $GITHUB_ENV
-      # - name: create tag version
-      #   shell: bash
-      #   run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-      #   id: extract_branch
-      # - name: tagging 
-      #   continue-on-error: true
-      #   uses: rickstaa/action-create-tag@v1
-      #   with:
-      #     tag: 'v.${{ steps.extract_branch.outputs.branch }}.0.0.1'
-      #     message: "Latest release"
-      # - name: current tag 
-      #   run: git describe --abbrev=0
-
-      #   name: Create/update tag
 
