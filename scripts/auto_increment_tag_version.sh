@@ -1,7 +1,8 @@
+
 #!/bin/bash
 
 #get highest tag number
-VERSION="git describe --abbrev=0 --tags"
+VERSION=`git describe --abbrev=0 --tags`
 
 #replace . with space so can split into an array
 VERSION_BITS=(${VERSION//./ })
@@ -10,12 +11,11 @@ VERSION_BITS=(${VERSION//./ })
 VNUM1=${VERSION_BITS[2]}
 VNUM2=${VERSION_BITS[3]}
 VNUM3=${VERSION_BITS[4]}
-# VNUM1="echo $VNUM1 | sed 's/v//'"
-echo $VNUM1 $VNUM2 $VNUM3
+VNUM1=`echo $VNUM1 | sed 's/v//'`
 
-# # Check for #major or #minor in commit message and increment the relevant version number
-MAJOR="git log --format=%B -n 1 HEAD | grep '#major'"
-MINOR="git log --format=%B -n 1 HEAD | grep '#minor'"
+# Check for #major or #minor in commit message and increment the relevant version number
+MAJOR=`git log --format=%B -n 1 HEAD | grep '#major'`
+MINOR=`git log --format=%B -n 1 HEAD | grep '#minor'`
 
 if [ "$MAJOR" ]; then
     echo "Update major version"
@@ -30,9 +30,7 @@ else
     echo "Update patch version"
     VNUM3=$((VNUM3+1))
 fi
-
 echo "$VNUM1.$VNUM2.$VNUM3"
-
 # #create new tag
 # NEW_TAG="v$VNUM1.$VNUM2.$VNUM3"
 
