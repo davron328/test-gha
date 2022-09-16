@@ -18,8 +18,6 @@ jobs:
         run: |
           echo "${{steps.greet.outputs.time}}"
           echo "${{steps.greet.outputs.id}}"
-      - name: run scripts
-        run: echo "bash auto_increment_tag_version.sh ${{steps.greet.outputs.id}}"
   create-tag:
   # how to make sure that step runs if only there is no error on github actions workflow. 
     runs-on: ubuntu-latest      
@@ -30,8 +28,11 @@ jobs:
       - name: get latest tag
         uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
-      - name: latest tag
+      - name: print latest tag
         run: echo ${{ steps.get-latest-tag.outputs.tag }}
+      - name: run scripts
+        working-directory: scripts
+        run: echo -e "$(bash auto_increment_tag_version.sh ${{steps.greet.outputs.id}})"
        
 
       # - name: Tag version
