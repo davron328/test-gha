@@ -20,13 +20,15 @@ jobs:
           echo "${{steps.greet.outputs.id}}"
   create-tag:
   # how to make sure that step runs if only there is no error on github actions workflow. 
-    runs-on: ubuntu-latest      
+    runs-on: ubuntu-latest
+    outputs:
+      branch: ${{ steps.branch.outputs.cur_branch }}
     steps:
       # if: branch is uat and Prod
       - name: checkout
         uses: actions/checkout@v3
         with:
-          ref: github.ref
+          ref: ${{ needs.create-tag.outputs.branch }}
       - name: get latest tag
         uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
@@ -34,6 +36,7 @@ jobs:
         run: echo ${{ steps.get-latest-tag.outputs.tag }}
       - name: current branch
         run: echo "::set-output name=cur_branch::${GITHUB_REF##*/}"
+        id: branch
       - name: run scripts
         working-directory: scripts
         run: echo "::set-output name=version::$(bash auto_increment_tag_version.sh ${{ steps.get-latest-tag.outputs.tag }})"
