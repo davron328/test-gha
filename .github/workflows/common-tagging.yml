@@ -44,7 +44,7 @@ jobs:
       - name: branch
         run: |
           echo ${{ steps.branch.outputs.cur_branch }}
-          echo "github.ref"
+          echo ${{ github.ref }}
       - name: Create a tag
         uses: rickstaa/action-create-tag@v1
         with:
