@@ -5,7 +5,6 @@ on:
     branches:
       - master
       - stage
-    
 jobs:
   simple-app:
     runs-on: ubuntu-latest
@@ -26,6 +25,8 @@ jobs:
       # if: branch is uat and Prod
       - name: checkout
         uses: actions/checkout@v3
+        with:
+          ref: github.ref
       - name: get latest tag
         uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
@@ -35,11 +36,14 @@ jobs:
         working-directory: scripts
         run: echo "::set-output name=version::$(bash auto_increment_tag_version.sh ${{ steps.get-latest-tag.outputs.tag }})"
         id: current_version
-      - name: current branch
-        run: echo "::set-output name=cur_branch::${GITHUB_REF##*/}"
-        id: branch
       - name: Create a tag
         uses: rickstaa/action-create-tag@v1
+      - name: branch
+        run: |
+          echo ${{ steps.branch.outputs.cur_branch }}
+          echo "github.ref"
+      - name: another
+        run: echo ${{ steps.branch.outputs.cur_branch }}
         with:
           tag: "v.${{ steps.branch.outputs.cur_branch }}.${{ steps.current_version.outputs.version }}"
           message: "Latest release"
