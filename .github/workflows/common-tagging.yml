@@ -38,12 +38,12 @@ jobs:
         run: echo ${{ steps.get-latest-tag.outputs.tag }}
         # if no tag found
       - name: crete new tag manually
-        if: steps.get-latest-tag.outputs.tag == 'v.0.0.0'
+        if: steps.get-latest-tag.outputs.tag == 'v0.0.0'
         run: |
           git tag "v.${{ steps.branch.outputs.cur_branch }}.0.0.1"
           git push origin "v.${{ steps.branch.outputs.cur_branch }}.0.0.1"
       - name: run scripts
-        if: steps.get-latest-tag.outputs.tag != 'v.0.0.0'
+        if: steps.get-latest-tag.outputs.tag != 'v0.0.0'
         working-directory: scripts
         run: echo "::set-output name=version::$(bash auto_increment_tag_version.sh ${{ steps.get-latest-tag.outputs.tag }})"
         id: current_version
