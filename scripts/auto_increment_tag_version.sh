@@ -2,7 +2,7 @@
 
 #get highest tag number
 VERSION=$1
-
+    
 #replace . with space so can split into an array
 VERSION_BITS=(${VERSION//./ })
 
