@@ -1,0 +1,13 @@
+latest
+v.1.0
+v.master.0.0.1
+v.master.0.0.2
+v.master.0.0.3
+v.master.1.0.0
+v.master.1.0.1
+v.master.1.1.0
+v.master.1.1.2
+v.master.1.1.3
+v.master.1.1.4
+v.stage.1.1.1
+v.stage.1.1.5
