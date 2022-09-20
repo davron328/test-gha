@@ -38,7 +38,7 @@ jobs:
       - name: print latest tag
         run: echo ${{ steps.get-latest-tag.outputs.tag }}
         # if no tag found
-      - name: crete new tag
+      - name: crete new tag manually
         if: ${{ steps.get-latest-tag.outputs.tag }} == "v.0.0.0"
         run: |
           git tag "v.${{ steps.branch.outputs.cur_branch }}.0.0.1"
