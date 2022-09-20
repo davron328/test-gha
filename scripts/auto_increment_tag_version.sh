@@ -2,13 +2,13 @@
 
 #get highest tag number
 VERSION=$1
+
 #when no tag found in the repo
 if [ $VERSION == 'v0.0.0' ]; then
     echo '0.0.1'
     exit 0
 fi
 
-    
 #replace . with space so can split into an array
 VERSION_BITS=(${VERSION//./ })
 
