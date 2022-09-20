@@ -4,7 +4,7 @@
 VERSION=$1
 #when no tag found in the repo
 if [ $VERSION == 'v.0.0.0' ]; then
-    echo '0.0.0'
+    echo '0.0.1'
     exit 0
 fi
 
