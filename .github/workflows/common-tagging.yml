@@ -32,21 +32,17 @@ jobs:
       - name: current branch
         run: echo "::set-output name=cur_branch::${GITHUB_REF##*/}"
         id: branch
-      - name: get latest tag
-        uses: actions-ecosystem/action-get-latest-tag@v1
-        id: get-latest-tag
-      - name: print latest tag
-        run: echo ${{ steps.get-latest-tag.outputs.tag }}
-      #   # if no tag found
-      # - name: crete new tag manually
-      #   if: steps.get-latest-tag.outputs.tag == 'v0.0.0'
-      #   run: |
-      #     git tag "v.${{ steps.branch.outputs.cur_branch }}.0.0.1"
-      #     git push origin "v.${{ steps.branch.outputs.cur_branch }}.0.0.1"
+        # verdion #1
+      # - name: get latest tag
+      #   uses: actions-ecosystem/action-get-latest-tag@v1
+      #   id: get-latest-tag
+      # - name: print latest tag
+      #   run: echo ${{ steps.get-latest-tag.outputs.tag }}
+      # verdion #2
       - name: run scripts
-        # if: steps.get-latest-tag.outputs.tag != 'v0.0.0'
         working-directory: scripts
-        run: echo "::set-output name=version::$(bash auto_increment_tag_version.sh ${{ steps.get-latest-tag.outputs.tag }})"
+        # run: echo "::set-output name=version::$(bash auto_increment_tag_version.sh ${{ steps.get-latest-tag.outputs.tag }})"
+        run: echo "::set-output name=version::$(bash auto_increment_tag_version.sh)"
         id: current_version
       - name: branch
         run: |
