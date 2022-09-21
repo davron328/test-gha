@@ -14,7 +14,7 @@ jobs:
         uses: actions/hello-world-javascript-action@v1
         with: 
           who-to-greet: Tima
-      - name: Log Greeting Timacha
+      - name: Log Greeting Tima
         run: |
           echo "${{steps.greet.outputs.time}}"
           echo "${{steps.greet.outputs.id}}"
