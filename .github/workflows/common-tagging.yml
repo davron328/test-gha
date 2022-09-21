@@ -35,7 +35,7 @@ jobs:
       - name: set env
         run: |
           git fetch --prune --unshallow
-          echo "::set-output name=tag::$(git describe --abbrev=0 --tags)"
+          echo "::set-output name=tag::$(git describe --abbrev=0 --tags || echo 'v0.0.0')" 
         id: tag
       - name: echo tag
         run: echo ${{ steps.tag.outputs.tag }}
