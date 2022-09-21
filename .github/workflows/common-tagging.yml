@@ -13,7 +13,7 @@ jobs:
         id: greet
         uses: actions/hello-world-javascript-action@v1
         with: 
-          who-to-greet: Tima
+          who-to-greet: Timacha
       - name: Log Greeting Timacha
         run: |
           echo "${{steps.greet.outputs.time}}"
