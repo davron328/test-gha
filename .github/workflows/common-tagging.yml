@@ -33,7 +33,9 @@ jobs:
         run: echo "::set-output name=cur_branch::${GITHUB_REF##*/}"
         id: branch
       - name: set env
-        run: echo "::set-output name=tag::$(git describe --abbrev=0 --tags)"
+        run: |
+          git fetch -t
+          echo "::set-output name=tag::$(git describe --abbrev=0 --tags)"
         id: tag
       - name: echo tag
         run: echo ${{ steps.tag.outputs.tag }}
