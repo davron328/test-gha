@@ -26,12 +26,17 @@ jobs:
     steps:
       # if: branch is uat and Prod
       - name: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
           ref: ${{ needs.create-tag.outputs.branch }}
       - name: current branch
         run: echo "::set-output name=cur_branch::${GITHUB_REF##*/}"
         id: branch
+      - name: set env
+        run: echo "::set-output name=tag::$(git describe --abbrev=0 --tags)"
+        id: tag
+      - name: echo tag
+        run: echo ${{ steps.tag.outputs.tag }}
         # verdion #1
       # - name: get latest tag
       #   uses: actions-ecosystem/action-get-latest-tag@v1
