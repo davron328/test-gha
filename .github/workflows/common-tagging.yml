@@ -49,7 +49,7 @@ jobs:
       - name: run scripts
         working-directory: scripts
         # run: echo "::set-output name=version::$(bash auto_increment_tag_version.sh ${{ steps.get-latest-tag.outputs.tag }})"
-        run: echo "::set-output name=version::$(bash auto_increment_tag_version.sh)"
+        run: echo "::set-output name=version::$(bash auto_increment_tag_version.sh ${{ steps.tag.outputs.tag }})"
         id: current_version
       - name: branch
         run: |
