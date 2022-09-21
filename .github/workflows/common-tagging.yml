@@ -34,7 +34,7 @@ jobs:
         id: branch
       - name: set env
         run: |
-          git fetch -t
+          git fetch --prune --unshallow
           echo "::set-output name=tag::$(git describe --abbrev=0 --tags)"
         id: tag
       - name: echo tag
