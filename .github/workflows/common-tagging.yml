@@ -39,16 +39,8 @@ jobs:
         id: tag
       - name: echo tag
         run: echo ${{ steps.tag.outputs.tag }}
-        # verdion #1
-      # - name: get latest tag
-      #   uses: actions-ecosystem/action-get-latest-tag@v1
-      #   id: get-latest-tag
-      # - name: print latest tag
-      #   run: echo ${{ steps.get-latest-tag.outputs.tag }}
-      # verdion #2
       - name: run scripts
         working-directory: scripts
-        # run: echo "::set-output name=version::$(bash auto_increment_tag_version.sh ${{ steps.get-latest-tag.outputs.tag }})"
         run: echo "::set-output name=version::$(bash auto_increment_tag_version.sh ${{ steps.tag.outputs.tag }})"
         id: current_version
       - name: branch
