@@ -8,22 +8,22 @@ on:
     inputs:
       job-name:
         type: choice
-        description: select a job to run (all, job1, job2)
+        description: select a job to run
         default: all
         options:
           - "job1"
           - "job2"
 
 jobs:
-  simple-app:
-    if: contains(github.event.schedule, '*/5 * * * *') || github.event.inputs.job-name == 'job1'
+  first-job:
+    if: github.event.schedule == '*/5 * * * *' || github.event.inputs.job-name == 'job1'
     runs-on: ubuntu-latest
     steps:
       - name: job one
         run: echo "this is ${{ github.event.inputs.job-name }}"
 
   second-job:
-    if: contains(github.event.schedule, '*/8 * * * *') || github.event.inputs.job-name == 'job2'
+    if: github.event.schedule == '*/8 * * * *' || github.event.inputs.job-name == 'job2'
     runs-on: ubuntu-latest
     steps:
       - name: job one
@@ -39,8 +39,9 @@ jobs:
     steps:
       - name: test loop
         run: |
+          set +x
           for file in ${LOG}; do 
             echo "this is ${file}"
           done
-          
+
         
