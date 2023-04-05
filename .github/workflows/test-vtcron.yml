@@ -1,0 +1,46 @@
+name: vtcron jobs
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+    - cron: '*/8 * * * *'
+  workflow_dispatch:
+    inputs:
+      job-name:
+        type: choice
+        description: select a job to run (all, job1, job2)
+        default: all
+        options:
+          - "job1"
+          - "job2"
+
+jobs:
+  simple-app:
+    if: contains(github.event.schedule, '*/5 * * * *') || github.event.inputs.job-name == 'job1'
+    runs-on: ubuntu-latest
+    steps:
+      - name: job one
+        run: echo "this is ${{ github.event.inputs.job-name }}"
+
+  second-job:
+    if: contains(github.event.schedule, '*/8 * * * *') || github.event.inputs.job-name == 'job2'
+    runs-on: ubuntu-latest
+    steps:
+      - name: job one
+        run: echo "this is ${{ github.event.inputs.job-name }}"
+  
+  test-loop:
+    runs-on: ubuntu-latest
+    env:
+      LOG: |
+        file.txt
+        file1.txt
+        file2.txt
+    steps:
+      - name: test loop
+        run: |
+          for file in ${LOG}; do 
+            echo "this is ${file}"
+          done
+          
+        
