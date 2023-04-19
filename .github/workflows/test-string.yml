@@ -16,11 +16,11 @@ jobs:
         run: |
           if: contains(github.event.schedule, '*/5 * * * *')
             echo "is_update_time="True" >> GITHUB_OUTPUT
-            echo "${needs.prep.outputs.branch}"
+            echo "${outputs.branch}"
           
-      - name: run trough srings
-        # if: needs.prep.outputs.branch == True
-        run: | 
-          echo "${needs.prep.outputs.branch}"
-          echo 'IT IS WORKING'
+      # - name: run trough srings
+      #   # if: needs.prep.outputs.branch == True
+      #   run: | 
+      #     echo "${needs.prep.outputs.branch}"
+      #     echo 'IT IS WORKING'
 
