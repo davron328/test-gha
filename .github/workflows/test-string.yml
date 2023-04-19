@@ -3,6 +3,7 @@ name: test string
 on:
   schedule:
     - cron: '*/5 * * * *'
+    - cron: '*/6 * * * *'
     - cron: '*/7 * * * *'
     - cron: '*/8 * * * *'
 
@@ -13,11 +14,12 @@ jobs:
     steps:
       - name: check for time 
         run: |
-          if: contains(github.event.schedule, '*/6 * * * *') || contains(github.event.schedule, '*/6 * * * *') || contains(github.event.schedule, '*/8 * * * *')
+          if: contains(github.event.schedule, '*/5 * * * *') || contains(github.event.schedule, '*/6 * * * *') || contains(github.event.schedule, '*/8 * * * *')
             echo "is_update_time="True" >> GITHUB_OUTPUT
+            echo "${needs.prep.outputs.branch}"
           
       - name: run trough srings
-        if: needs.prep.outputs.branch == "True"
+        if: needs.prep.outputs.branch == True
         run: | 
           echo "${needs.prep.outputs.branch}"
           echo 'IT IS WORKING'
