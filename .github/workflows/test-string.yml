@@ -1,0 +1,24 @@
+name: test string
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+    - cron: '*/7 * * * *'
+    - cron: '*/8 * * * *'
+
+jobs:
+  simple-app:
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: check for time 
+        run: |
+          if: contains(github.event.schedule, '*/6 * * * *') || contains(github.event.schedule, '*/6 * * * *') || contains(github.event.schedule, '*/8 * * * *')
+            echo "is_update_time="True" >> GITHUB_OUTPUT
+          
+      - name: run trough srings
+        if: needs.prep.outputs.branch == "True"
+        run: | 
+          echo "${needs.prep.outputs.branch}"
+          echo 'IT IS WORKING'
+
