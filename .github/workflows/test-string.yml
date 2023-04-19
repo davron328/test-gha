@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: check for time 
         run: |
-          if: contains(github.event.schedule, '*/5 * * * *' '*/6 * * * *' '*/8 * * * *')
+          if: contains(github.event.schedule, '*/5 * * * *')
             echo "is_update_time="True" >> GITHUB_OUTPUT
             echo "${needs.prep.outputs.branch}"
           
