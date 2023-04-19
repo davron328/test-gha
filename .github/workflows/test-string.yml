@@ -19,7 +19,7 @@ jobs:
             echo "${needs.prep.outputs.branch}"
           
       - name: run trough srings
-        if: needs.prep.outputs.branch == True
+        # if: needs.prep.outputs.branch == True
         run: | 
           echo "${needs.prep.outputs.branch}"
           echo 'IT IS WORKING'
