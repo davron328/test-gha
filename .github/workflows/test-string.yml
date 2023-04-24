@@ -18,7 +18,7 @@ jobs:
         run: echo thi is ${{ github.job }}
 
   first_job:
-    if: contains(fromJSON('['*/6 * * * *', '*/8 * * * *']'), github.event.schedule)
+    if: contains(fromJSON('["*/6 * * * *", "*/8 * * * *"]'), github.event.schedule)
     runs-on: ubuntu-latest
     steps:
     
@@ -33,7 +33,7 @@ jobs:
         run: | 
           echo 'IT IS WORKING'
   second_job:
-    if: contains(fromJSON('['*/5 * * * *', '*/7 * * * *']'), github.event.schedule)
+    if: contains(fromJSON('["*/5 * * * *", "*/7 * * * *"]'), github.event.schedule)
     runs-on: ubuntu-latest
     steps:
       - name: test github job
