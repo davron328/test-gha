@@ -1,6 +1,9 @@
 name: test string
-# run-name: this is ${{ github.job }}
+run-name: this is ${{ github.job }}
 on:
+  push:
+    branches:
+    - manster  
   schedule:
     - cron: '*/5 * * * *'
     - cron: '*/6 * * * *'
@@ -8,6 +11,12 @@ on:
     - cron: '*/8 * * * *'
 
 jobs:
+  zero_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: run on master
+        run: echo thi is ${{ github.job }}
+
   first_job:
     if: contains(fromJSON('['*/6 * * * *', '*/8 * * * *']'), github.event.schedule)
     runs-on: ubuntu-latest
