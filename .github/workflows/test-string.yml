@@ -1,5 +1,5 @@
 name: test string
-run-name: this is ${{ github.job }}
+# run-name: this is ${{ github.job }}
 on:
   schedule:
     - cron: '*/5 * * * *'
