@@ -2,10 +2,10 @@
 
 #get highest tag number
 VERSION=$1
-#this is test11
+#this is test1122
 # when no tag found in the repo
 if [ $VERSION == 'v0.0.0' ]; then
-    echo '0.0.1'
+    echo '0.0.11'
     exit 0
 fi
 #another test
