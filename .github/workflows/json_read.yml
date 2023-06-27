@@ -3,7 +3,7 @@ name: read JSON
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   config:
     runs-on: ubuntu-latest
