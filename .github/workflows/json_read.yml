@@ -1,0 +1,46 @@
+name: read JSON
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  config:
+    runs-on: ubuntu-latest
+    outputs:
+      email_vars: ${{ steps.vars.outputs.email_vars }}
+    env:
+      test: test
+    steps:
+      - name: create json
+        run: |
+          echo '{
+            "job_id": "${{ github.job }}"
+            "run_id": "${{ github.run_id }}"
+          }' > email_vars.json
+
+          cat email_vars.json
+
+      - name: create vars 
+        id: vars
+        run: |
+          all_vars=$(cat  email_vars.json)
+          echo "email_vars=\"$all_vars\"" >> $GITHUB_OUTPUTS
+  
+  read_job:
+    runs-on: ubuntu-latest
+    outputs:
+      email_vars: ${{ steps.read.outputs.job_id }}
+    needs: config
+    steps:
+      - name: read_work
+        id: read
+        run: |
+          echo "job_id=${{ needs.config.outputs.email_vars }} " >> $GITHUB_OUTPUTS
+          echo "#######testing######"
+          cat $job_id
+          echo "#######testing######"
+
+
+
+
