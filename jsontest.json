@@ -1,0 +1,4 @@
+'{
+            "job_id": "${{ github.job }}",
+            "run_id": "${{ github.run_id }}"
+          }'

@@ -8,7 +8,7 @@ jobs:
   config:
     runs-on: ubuntu-latest
     outputs:
-      email_vars: ${{ steps.vars.outputs.email_vars }}
+      run_id: ${{ steps.vars.outputs.email_vars }}
     env:
       test: test
     steps:
@@ -25,21 +25,18 @@ jobs:
         id: vars
         run: |
           all_vars=$(cat email_vars.json)
-          echo "email_vars=$all_vars" >> $GITHUB_OUTPUT
+          echo "run_id=$(cat all_vars | jq -r '.run_id'" >> $GITHUB_OUTPUT
   
   read_job:
     runs-on: ubuntu-latest
-    outputs:
-      job_id: ${{ steps.read.outputs.job_id }}
     needs: config
     steps:
       - name: read_work
         id: read
         run: |
-          echo "job_id=${{ needs.config.outputs.email_vars }} " >> $GITHUB_OUTPUT
+         echo "${{ needs.config.outputs.run_id }}"
           echo "#######testing######"
-          cat $job_id
-          echo "#######testing######"
+
 
 
 
