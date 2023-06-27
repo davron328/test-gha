@@ -25,7 +25,8 @@ jobs:
         id: vars
         run: |
           all_vars=$(cat email_vars.json)
-          echo "run_id=$(echo $all_vars| jq -r '.run_id')" >> $GITHUB_OUTPUT
+          run_id=$(echo $all_vars| jq -r '.run_id')
+          echo "run_id=$run_id" >> $GITHUB_OUTPUT
           echo $run_id
   
   read_job:
