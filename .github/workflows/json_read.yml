@@ -25,7 +25,7 @@ jobs:
         id: vars
         run: |
           all_vars=$(cat email_vars.json)
-          echo "email_vars=$all_vars" >> $GITHUB_OUTPUTS
+          echo "email_vars=$all_vars" >> $GITHUB_OUTPUT
   
   read_job:
     runs-on: ubuntu-latest
@@ -36,7 +36,7 @@ jobs:
       - name: read_work
         id: read
         run: |
-          echo "job_id=${{ needs.config.outputs.email_vars }} " >> $GITHUB_OUTPUTS
+          echo "job_id=${{ needs.config.outputs.email_vars }} " >> $GITHUB_OUTPUT
           echo "#######testing######"
           cat $job_id
           echo "#######testing######"
