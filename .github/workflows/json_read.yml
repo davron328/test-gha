@@ -8,7 +8,7 @@ jobs:
   config:
     runs-on: ubuntu-latest
     outputs:
-      run_id: ${{ steps.vars.outputs.email_vars }}
+      run_id: ${{ steps.vars.outputs.run_id }}
     env:
       test: test
     steps:
@@ -24,8 +24,8 @@ jobs:
       - name: create vars 
         id: vars
         run: |
-          # all_vars=$(cat email_vars.json)
-          echo "run_id=$(cat email_vars.json | jq -r '.run_id')" >> $GITHUB_OUTPUT
+          all_vars=$(cat email_vars.json)
+          echo "run_id=$(cat $all_vars| jq -r '.run_id')" >> $GITHUB_OUTPUT
   
   read_job:
     runs-on: ubuntu-latest
